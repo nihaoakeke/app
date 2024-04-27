@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/main_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray1"/>
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@drawable/selector_main_tab_text"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,SmallSp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/tab_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:visibility="gone"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="书籍"
+            android:textColor="@drawable/selector_main_tab_text"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,SmallSp" />
+        <RadioButton
+            android:id="@+id/tab_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:visibility="gone"
+            android:checked="false"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="发现"
+            android:textColor="@drawable/selector_main_tab_text"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,SmallSp" />
+
+
+        <RadioButton
+            android:id="@+id/tab_me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="@drawable/selector_main_tab_text"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,SmallSp" />
+    </RadioGroup>
+
+</LinearLayout>
