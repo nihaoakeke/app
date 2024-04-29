@@ -50,6 +50,12 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             tools:ignore="WrongManifestParent">
         </activity>
+        <activity
+            android:name=".activity.PublishActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            tools:ignore="WrongManifestParent">
+        </activity>
 
 </application>
 </manifest>

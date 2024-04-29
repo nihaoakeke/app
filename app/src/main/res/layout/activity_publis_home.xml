@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/view_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:padding="10dp"
+        android:background="@drawable/login_input"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        >
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:visibility="gone"
+
+                android:src="@drawable/user"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:text="标题："
+                />
+
+            <EditText
+                android:id="@+id/edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:padding="10dp"
+                android:hint="请输入标题"
+                android:background="@null"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/gray3"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroupUnassured"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="2dp"
+            android:layout_below="@+id/title"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/home_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:checked="true"
+                android:text="科幻" />
+
+            <RadioButton
+                android:id="@+id/grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:text="悬疑" />
+            <RadioButton
+                android:id="@+id/socket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:layout_marginLeft="2dp"
+                android:text="历史" />
+            <RadioButton
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:layout_marginLeft="2dp"
+                android:text="其他" />
+
+
+        </RadioGroup>
+        <TextView
+            android:id="@+id/tz"
+            android:layout_width="match_parent"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_below="@+id/radioGroupUnassured"
+            android:layout_height="wrap_content"/>
+        <RadioGroup
+            android:id="@+id/radioGroupUnassured1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="2dp"
+            android:visibility="gone"
+            android:layout_below="@+id/tz"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/jd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:checked="false"
+                android:text="简单模式" />
+
+            <RadioButton
+                android:id="@+id/yb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:text="一般模式" />
+            <RadioButton
+                android:id="@+id/kn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray1"
+                android:layout_marginLeft="2dp"
+                android:text="困难模式" />
+
+
+
+        </RadioGroup>
+        <LinearLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/radioGroupUnassured1"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:src="@drawable/user"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="章节1："
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/select_A"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="15dp"
+                android:padding="10dp"
+                android:hint="请输入选项信息"
+                android:background="@null"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/gray3"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/login_btn"
+            android:gravity="center"
+            android:onClick="registerClick"
+            android:text="下一章"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_alignParentBottom="true"
+            />
+
+</RelativeLayout>
+
+</LinearLayout>
