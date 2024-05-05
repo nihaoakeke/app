@@ -7,16 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.novel.myapplication.activity.MainActivity
 import com.novel.myapplication.activity.PublishActivity
+import com.novel.myapplication.adapter.BookListAdapter
+import com.novel.myapplication.bean.BookBean
+import com.novel.myapplication.dao.BookBeanDao
+import com.novel.myapplication.dao.BookItemBeanDao
 import com.novel.myapplication.databinding.FragmentHomeBinding
-import org.xutils.x.Ext.init
 import java.text.SimpleDateFormat
 import java.util.Date
 
 class HomeFragment : Fragment(){
     private var fragmentHomeBinding: FragmentHomeBinding? = null
+    var mRecyclerAdapter: BookListAdapter? = null
+    var dataList: MutableList<BookBean> = mutableListOf()
+    var bookItemBeanDao:BookItemBeanDao?=null
+    var bookBeanDao: BookBeanDao?=null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,10 +45,17 @@ class HomeFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
+        bookItemBeanDao = BookItemBeanDao()
+        bookBeanDao = BookBeanDao()
         fragmentHomeBinding!!.publish.setOnClickListener(){
             var intent = Intent(activity, PublishActivity::class.java)
             activity?.startActivity(intent)
         }
+        dataList  = bookBeanDao!!.getContactAll2() as MutableList<BookBean>;
+        mRecyclerAdapter = context?.let { BookListAdapter(it,dataList,) }
+        fragmentHomeBinding!!.recycler.setLayoutManager(LinearLayoutManager(activity))
+        fragmentHomeBinding!!.recycler.setAdapter(mRecyclerAdapter)
+
     }
 
     fun splitTabLayout(tabLayout: TabLayout) {
@@ -71,9 +86,9 @@ class HomeFragment : Fragment(){
         })
     }
 
-    fun getDate(currentTime: Long): String {
+    fun getDate(): String {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
-        val date = Date(currentTime)
+        val date = Date(System.currentTimeMillis())
         println(formatter.format(date))
         return formatter.format(date)
     }

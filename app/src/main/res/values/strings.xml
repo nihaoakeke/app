@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">novel</string>
+    <string name="username">姓名</string>
+    <string name="pwd">密码</string>
+    <string name="user_type_au">作者</string>
+    <string name="user_type_reader">读者</string>
+    <string name="publish_title">标题：</string>
+    <string name="publish_title_tips">请输入标题</string>
+    <string name="publish_type_kh">科幻</string>
+    <string name="publish_type_qh">奇幻</string>
+    <string name="publish_type_xy">悬疑</string>
+    <string name="publish_type_lm">浪漫</string>
+    <string name="publish_type_other">其他</string>
+    <string name="publish_type_kb">恐怖</string>
+    <string name="sc">收藏</string>
+    <string name="tips_c">请填写章节内容，再选择下一章</string>
 </resources>

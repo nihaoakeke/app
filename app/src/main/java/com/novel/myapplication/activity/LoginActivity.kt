@@ -12,6 +12,7 @@ import com.novel.myapplication.base.BaseActivity
 import com.novel.myapplication.bean.UserBean
 import com.novel.myapplication.dao.UserDao
 import com.novel.myapplication.databinding.ActivityLoginBinding
+import com.novel.myapplication.utils.SharePrefUtils
 
 
 class LoginActivity: BaseActivity<ActivityLoginBinding>() {
@@ -42,9 +43,14 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() {
         if (i == R.id.btn_login) {
             if (!TextUtils.isEmpty(type)) {
                 if (type == "作家") {
+
                 } else if (type == "读者") {
                 } else if (type == "学生") {
                 }
+            }
+            if (TextUtils.isEmpty(type)){
+                Toast.makeText(this@LoginActivity, "请选择用户类型", Toast.LENGTH_LONG).show()
+                return
             }
             mViewBinding.progressCircular.setVisibility(View.VISIBLE)
             if (!TextUtils.isEmpty(
@@ -56,6 +62,8 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() {
                     ) && mViewBinding.editPwd.getText().toString().equals("admin123")
                 ) {
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    SharePrefUtils.saveName(this@LoginActivity,mViewBinding.editAddress.getText().toString())
+                    SharePrefUtils.setLoginType(this@LoginActivity,type)
                     intent.putExtra("user", "admin")
                     startActivity(intent)
                 }
@@ -78,6 +86,8 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() {
                     ) {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         intent.putExtra("user", userBean.name.toString())
+                        SharePrefUtils.saveName(this@LoginActivity,userBean.name.toString())
+                        SharePrefUtils.setLoginType(this@LoginActivity,type)
                         startActivity(intent)
                         mViewBinding.progressCircular.setVisibility(View.GONE)
                     } else {

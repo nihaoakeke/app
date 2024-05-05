@@ -4,13 +4,13 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/view_title"/>
+    <include layout="@layout/view_title"
+        android:id="@+id/tl"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="1dp"
-        android:background="@drawable/login_input"
         android:orientation="vertical"
         android:layout_margin="10dp"
 
@@ -38,7 +38,7 @@
                 android:text="标题："
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,65 +53,12 @@
 
         </LinearLayout>
 
-        <RadioGroup
-            android:id="@+id/radioGroupUnassured"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="2dp"
-            android:layout_below="@+id/title"
-            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/home_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray1"
-                android:checked="true"
-                android:text="@string/publish_type_kh" />
-
-            <RadioButton
-                android:id="@+id/qh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray1"
-                android:text="@string/publish_type_qh" />
-            <RadioButton
-                android:id="@+id/kb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray1"
-                android:text="@string/publish_type_kb" />
-            <RadioButton
-                android:id="@+id/lm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray1"
-                android:text="浪漫" />
-            <RadioButton
-                android:id="@+id/ls"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray1"
-                android:layout_marginLeft="2dp"
-                android:text="历史" />
-            <RadioButton
-                android:id="@+id/other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray1"
-                android:layout_marginLeft="2dp"
-                android:text="其他" />
-
-
-        </RadioGroup>
         <TextView
             android:id="@+id/tz"
             android:layout_width="match_parent"
             android:text=""
             android:textSize="18sp"
-            android:layout_below="@+id/radioGroupUnassured"
             android:layout_height="wrap_content"/>
         <RadioGroup
             android:id="@+id/radioGroupUnassured1"
@@ -151,7 +98,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/radioGroupUnassured1"
             android:src="@drawable/user"
@@ -171,16 +118,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="章节1："
+                android:text="章节"
+                android:layout_margin="10dp"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/chapter"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:padding="10dp"
-                android:hint="请输入选项信息"
                 android:background="@null"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
@@ -188,10 +135,15 @@
                 />
 
         </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/chapter_ll"
+            android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/chapter_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/chapter_ll"
@@ -202,15 +154,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="故事内容："
+                android:visibility="gone"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/chapter_content_edw"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:padding="10dp"
-                android:hint="请输入选项信息"
                 android:background="@null"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
@@ -218,10 +170,10 @@
                 />
 
         </LinearLayout>
+        </ScrollView>
 <TextView
     android:id="@+id/count"
     android:layout_width="wrap_content"
-    android:layout_below="@id/chapter_content"
     android:text="第1页"
     android:layout_margin="15dp"
     android:textSize="18sp"
@@ -257,6 +209,7 @@
             android:paddingRight="15dp"
             android:background="@drawable/login_btn_reg"
             android:gravity="center"
+            android:visibility="gone"
             android:onClick="registerClick"
             android:text="完成发布"
             android:textColor="@color/white"
