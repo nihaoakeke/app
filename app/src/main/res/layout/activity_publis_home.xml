@@ -4,7 +4,8 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/view_title"/>
+    <include layout="@layout/view_title"
+        android:id="@+id/tl"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -106,13 +107,7 @@
 
 
         </RadioGroup>
-        <TextView
-            android:id="@+id/tz"
-            android:layout_width="match_parent"
-            android:text=""
-            android:textSize="18sp"
-            android:layout_below="@+id/radioGroupUnassured"
-            android:layout_height="wrap_content"/>
+
         <RadioGroup
             android:id="@+id/radioGroupUnassured1"
             android:layout_width="match_parent"
@@ -120,7 +115,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="2dp"
             android:visibility="gone"
-            android:layout_below="@+id/tz"
             android:orientation="horizontal">
 
             <RadioButton
@@ -149,20 +143,23 @@
 
         </RadioGroup>
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:id="@+id/fm"
+            android:layout_width="90dp"
+            android:layout_height="60dp"
             android:visibility="visible"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/radioGroupUnassured1"
-            android:src="@drawable/user"
+            android:layout_below="@+id/radioGroupUnassured"
+            android:src="@mipmap/fm"
+            android:scaleType="fitXY"
             />
         <LinearLayout
             android:id="@+id/chapter_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/radioGroupUnassured1"
+            android:layout_below="@+id/fm"
             android:orientation="horizontal"
             >
 
@@ -192,25 +189,27 @@
             android:id="@+id/chapter_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_below="@+id/chapter_ll"
             android:orientation="horizontal"
             >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="top"
                 android:text="故事内容："
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/chapter_content_edw"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="160dp"
                 android:layout_marginLeft="15dp"
                 android:padding="10dp"
-                android:hint="请输入选项信息"
+                android:gravity="top"
+                android:hint="请输故事内容"
                 android:background="@null"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
@@ -218,10 +217,39 @@
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/chapter_content_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/chapter_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="故事插入图片："
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/radioGroupUnassured1"
+                android:src="@mipmap/gsfm"
+                android:scaleType="fitXY"
+                />
+
+        </LinearLayout>
 <TextView
     android:id="@+id/count"
     android:layout_width="wrap_content"
-    android:layout_below="@id/chapter_content"
+    android:layout_below="@id/chapter_content_img"
     android:text="第1页"
     android:layout_margin="15dp"
     android:textSize="18sp"

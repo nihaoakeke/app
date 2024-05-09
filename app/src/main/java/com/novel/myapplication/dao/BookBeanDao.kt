@@ -25,7 +25,7 @@ class BookBeanDao {
             if (dbManager== null){
                 dbManager = DatabaseOpenHelper.getInstance()
             }
-            val contact: BookBean? = dbManager?.findById(bookBean::class.java, bookBean.id)
+            val contact: BookBean? = dbManager?.findById(BookBean::class.java, bookBean.id)
             if (contact == null) {
                 dbManager!!.save(bookBean)
             } else {
@@ -36,9 +36,10 @@ class BookBeanDao {
                 val key3 = KeyValue("author", bookBean.author)
                 val key4 = KeyValue("time", bookBean.time)
                 val key5 = KeyValue("book_type", bookBean.book_type)
+                val key6 = KeyValue("collect", bookBean.collect)
                 //                builder.and("id", "=", ContextBean.getId());
 //
-                dbManager!!.update(bookBean::class.java, builder, key1, key2, key3,key4,key5)
+                dbManager!!.update(bookBean::class.java, builder, key1, key2, key3,key4,key5,key6)
                 //                dbManager.update(contact);
             }
         } catch (e: DbException) {
@@ -67,13 +68,26 @@ class BookBeanDao {
         return contactList
     }
 
-    fun getBook(name: String?): BookBean? {
-        var bookBean: BookBean? = null
+    fun bookBeanList(name: String?): List<BookBean?> {
+        var bookBean: List<BookBean?> = mutableListOf()
         try {
             val builder = WhereBuilder.b()
-            builder.and("name", "=", name)
+            builder.and("collect", "=", name)
             bookBean = dbManager!!.selector(BookBean::class.java).where(
-                "name",
+                "collect",
+                "=", name
+            ).findAll()
+        } catch (e: DbException) {
+            e.printStackTrace()
+        }
+        return bookBean
+    }
+    fun bookBean(name: String?): BookBean? {
+        var bookBean: BookBean?= null
+        try {
+            val builder = WhereBuilder.b()
+            bookBean = dbManager!!.selector(BookBean::class.java).where(
+                "bookName",
                 "=", name
             ).findFirst()
         } catch (e: DbException) {
@@ -81,7 +95,19 @@ class BookBeanDao {
         }
         return bookBean
     }
-
+    fun getBookBeanList(name: String?): List<BookBean?> {
+        var bookBean: List<BookBean?> = mutableListOf()
+        try {
+            val builder = WhereBuilder.b()
+            bookBean = dbManager!!.selector(BookBean::class.java).where(
+                "author",
+                "=", name
+            ).findAll()
+        } catch (e: DbException) {
+            e.printStackTrace()
+        }
+        return bookBean
+    }
     fun delete(ContextBean: BookBean?): Boolean {
         try {
             dbManager!!.delete(ContextBean)

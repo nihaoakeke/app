@@ -42,7 +42,10 @@ class UserBean  : Serializable {
 
     @Column(name = "Num")
     public var stuNum: String? = null //
-    
+
+    @Column(name = "introduce")
+    public var introduce: String? = null //
+
     
 
 }

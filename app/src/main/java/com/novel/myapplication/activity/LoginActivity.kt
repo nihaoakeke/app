@@ -25,7 +25,6 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() {
 
 
      fun initView() {
-         mViewBinding.editAddress.getText()
         mViewBinding.editPwd.getText()
         mViewBinding.radioGroupUnassured.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId -> //获取被选中的radiobutton的id
             val rcheck = findViewById<View>(checkedId) as RadioButton
@@ -37,6 +36,10 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        mViewBinding.progressCircular.visibility =View.GONE
+    }
 
     fun loginClick(v: View) {
         val i = v.id
@@ -84,12 +87,22 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() {
                         && userBean.pwd.toString()
                             .equals(mViewBinding.editPwd.getText().toString())
                     ) {
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        intent.putExtra("user", userBean.name.toString())
-                        SharePrefUtils.saveName(this@LoginActivity,userBean.name.toString())
-                        SharePrefUtils.setLoginType(this@LoginActivity,type)
-                        startActivity(intent)
                         mViewBinding.progressCircular.setVisibility(View.GONE)
+                        if (userBean.type.equals(type)){
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.putExtra("user", userBean.name.toString())
+                            SharePrefUtils.saveName(this@LoginActivity,userBean.name.toString())
+                            SharePrefUtils.setLoginType(this@LoginActivity,type)
+                            startActivity(intent)
+
+                        }else{
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "账号类型不对！",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
                     } else {
                         mViewBinding.progressCircular.setVisibility(View.GONE)
                         Toast.makeText(

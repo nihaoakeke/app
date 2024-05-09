@@ -25,7 +25,7 @@ class BookItemBeanDao {
             if (dbManager== null){
                 dbManager = DatabaseOpenHelper.getInstance()
             }
-            val itemBean: BoookItemBean? = dbManager?.findById(bookItemBean::class.java, bookItemBean.id)
+            val itemBean: BoookItemBean? = dbManager?.findById(BoookItemBean::class.java, bookItemBean.id)
             if (itemBean == null) {
                 dbManager!!.save(bookItemBean)
             } else {
@@ -38,9 +38,10 @@ class BookItemBeanDao {
                 val key5 = KeyValue("book_type", bookItemBean.book_type)
                 val key6 = KeyValue("page", bookItemBean.page)
                 val key7 = KeyValue("time", bookItemBean.time)
+                val key8 = KeyValue("picture", bookItemBean.picture)
                 //                builder.and("id", "=", ContextBean.getId());
 //
-                dbManager!!.update(bookItemBean::class.java, builder, key1, key2, key3,key4,key5,key6,key7)
+                dbManager!!.update(bookItemBean::class.java, builder, key1, key2, key3,key4,key5,key6,key7,key8)
                 //                dbManager.update(contact);
             }
         } catch (e: DbException) {

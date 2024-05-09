@@ -26,7 +26,16 @@ class BookBean  : Serializable {
 
     public var book_type: String? = null
 
-    
-    
+    @Column(name = "collect") //收藏
+
+    public var collect: String? = null
+
+
+    @Column(name = "count") //阅读次数
+
+    public var count: Int? = 0
+    @Column(name = "last") //阅读
+
+    public var last: Int? = 0
 
 }

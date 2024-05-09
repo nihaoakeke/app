@@ -35,13 +35,52 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:background="@null"
-                android:hint="请输入用户名"
+                android:hint="请输入邮箱地址"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/gray3"
                 android:textSize="16sp"
                 />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:text="请输入有效的邮箱地址"/>
+        <RadioGroup
+            android:id="@+id/radioGroupUnassured"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择角色"/>
+            <RadioButton
+                android:id="@+id/writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pk_blue"
+                android:text="商家" />
+            <RadioButton
+                android:id="@+id/reader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pk_blue"
+                android:text="学生" />
+            <RadioButton
+                android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pk_blue"
+                android:text="管理员" />
+
+
+        </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -56,7 +95,7 @@
                 />
 
             <EditText
-                android:id="@+id/edit_address"
+                android:id="@+id/edit_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
@@ -225,6 +264,30 @@
             android:layout_marginLeft="15dp"
             android:background="@null"
             android:hint="请输入你的生日"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/gray3"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="@string/introduce" />
+
+        <EditText
+            android:id="@+id/introduce"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:hint="请输入个人介绍"
             android:textColor="@color/textColor"
             android:textColorHint="@color/gray3"
             android:textSize="16sp"

@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:text=""
+        android:text="校园食品安全监管平台"
         android:textSize="22sp"
         />
 
@@ -153,13 +153,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/pk_blue"
-                android:text="作家" />
+                android:text="商家家" />
             <RadioButton
                 android:id="@+id/reader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/pk_blue"
-                android:text="读者" />
+                android:text="学生" />
+            <RadioButton
+                android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pk_blue"
+                android:text="管理员" />
 
 
         </RadioGroup>

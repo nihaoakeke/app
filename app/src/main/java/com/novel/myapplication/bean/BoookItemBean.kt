@@ -33,6 +33,16 @@ class BoookItemBean  : Serializable {
 
     public var page: String? = null
 
+    @Column(name = "picture") //图片
+
+    public var picture: String? = null
+    @Column(name = "last") //上一次阅读
+
+    public var last: Int? = null
+    @Column(name = "count") //上一次阅读
+
+    public var count: Int? = null
+
 
 
     

@@ -12,6 +12,15 @@
     <string name="publish_type_lm">浪漫</string>
     <string name="publish_type_other">其他</string>
     <string name="publish_type_kb">恐怖</string>
+    <string name="introduce">介绍</string>
     <string name="sc">收藏</string>
+    <string name="my_crate">我的创作</string>
+    <string name="my_coll">我的收藏</string>
     <string name="tips_c">请填写章节内容，再选择下一章</string>
+
+    <string-array name="books">
+        <item >华东师范大学</item>
+        <item >华东师范大学新校区</item>
+        <item >华东师范大学新校区</item>
+    </string-array>
 </resources>

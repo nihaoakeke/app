@@ -1,9 +1,9 @@
 package com.novel.myapplication.activity
 
+import android.graphics.BitmapFactory
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
-import com.novel.myapplication.R
 import com.novel.myapplication.base.BaseActivity
 import com.novel.myapplication.bean.BookBean
 import com.novel.myapplication.bean.BoookItemBean
@@ -18,6 +18,8 @@ class BookDetailsActivity : BaseActivity<ActivityDetailsBinding>(){
     lateinit var bookBeanDao: BookBeanDao
     lateinit var bookItemBeanDao: BookItemBeanDao
 
+    var bookBean = BookBean()
+
     var dataList: MutableList<BoookItemBean> = mutableListOf()
     var  count =1
 
@@ -26,18 +28,37 @@ class BookDetailsActivity : BaseActivity<ActivityDetailsBinding>(){
         super.onResume()
         initView()
        var bookId= intent.getStringExtra("id")
+
+        bookBeanDao.bookBean(bookId)?.let {
+            bookBean =it
+        }
         dataList = bookItemBeanDao.getBookItem(bookId) as MutableList<BoookItemBean>
 
         mViewBinding.editTitle.text = bookId
 
 
         if(dataList!= null &&dataList.size>0) {
-            mViewBinding.chapterContentEdw.setText(dataList.get(0).content)
-            mViewBinding.chapter.setText(dataList.get(0).chapter)
+            if (bookBean!= null ){
+                mViewBinding.chapterContentEdw.setText(bookBean!!.last?.let { dataList.get(it).content })
+                mViewBinding.chapter.setText(bookBean.last?.let { dataList.get(it).chapter })
+                if (!TextUtils.isEmpty(dataList.get(bookBean.last!!).picture)) {
+                    val bitmap = BitmapFactory.decodeFile(dataList.get(bookBean.last!!).picture)
+                    mViewBinding.img.setImageBitmap(bitmap)
+                }
+            }
+            else {
+                mViewBinding.chapterContentEdw.setText(dataList.get(0).content)
+                mViewBinding.chapter.setText(dataList.get(0).chapter)
+                if (!TextUtils.isEmpty(dataList.get(0).picture)) {
+                    val bitmap = BitmapFactory.decodeFile(dataList.get(0).picture)
+                    mViewBinding.img.setImageBitmap(bitmap)
+                }
+            }
+
         }
-        mViewBinding.tl.btnBack.setOnClickListener({
+        mViewBinding.tl.btnBack.setOnClickListener {
             finish()
-        })
+        }
     }
     protected fun initView() {
         bookBeanDao = BookBeanDao()
@@ -85,7 +106,15 @@ class BookDetailsActivity : BaseActivity<ActivityDetailsBinding>(){
            }
             count ++
             mViewBinding.count.setText("第"+count+"页")
-
+            dataList.get(count-1).count = dataList.get(count-1).count?.plus(1);
+            dataList.get(count-1).last = count-1;
+            bookItemBeanDao.addOrUpdate(dataList.get(count-1))
+            bookBean.count = bookBean.count?.plus(1);
+            bookBeanDao.addOrUpdate(bookBean)
+            if (!TextUtils.isEmpty(dataList.get(count-1).picture)) {
+                val bitmap = BitmapFactory.decodeFile(dataList.get(count-1).picture)
+                mViewBinding.img.setImageBitmap(bitmap)
+            }
            mViewBinding.chapterContentEdw.text= dataList.get(count-1).content
 
 

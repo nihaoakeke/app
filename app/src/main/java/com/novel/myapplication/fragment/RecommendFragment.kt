@@ -10,16 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.novel.myapplication.R
-import com.novel.myapplication.R.mipmap.xuexiao
 import com.novel.myapplication.activity.PublishActivity
 import com.novel.myapplication.adapter.BookListAdapter
-import com.novel.myapplication.adapter.HomeItemAdapter
 import com.novel.myapplication.bean.BookBean
-import com.novel.myapplication.bean.HomeItem
 import com.novel.myapplication.dao.BookBeanDao
 import com.novel.myapplication.dao.BookItemBeanDao
 import com.novel.myapplication.databinding.FragmentHomeBinding
@@ -27,10 +23,12 @@ import com.novel.myapplication.utils.SharePrefUtils
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class HomeFragment : Fragment(){
+class RecommendFragment : Fragment(){
     private var fragmentHomeBinding: FragmentHomeBinding? = null
-    var mRecyclerAdapter: HomeItemAdapter? = null
-    var dataList: MutableList<HomeItem> = mutableListOf()
+    var mRecyclerAdapter: BookListAdapter? = null
+    var dataList: MutableList<BookBean> = mutableListOf()
+    var bookItemBeanDao:BookItemBeanDao?=null
+    var bookBeanDao: BookBeanDao?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,28 +40,6 @@ class HomeFragment : Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var homeIte = HomeItem()
-        homeIte.name = "学校信息"
-        var homeIte1 = HomeItem()
-        homeIte1.name = "最新消息"
-        var homeIte2 = HomeItem()
-        homeIte2.name = "抽样调查"
-        var homeIte3 = HomeItem()
-        homeIte3.name = "学生菜谱"
-        var homeIte4 = HomeItem()
-        homeIte4.name = "营养搭配"
-        var homeIte5 = HomeItem()
-        homeIte5.name ="卫生检查"
-        var homeIte6 = HomeItem()
-        homeIte6.name="投诉统计"
-        dataList.add(homeIte)
-        dataList.add(homeIte1)
-        dataList.add(homeIte2)
-        dataList.add(homeIte3)
-        dataList.add(homeIte4)
-        dataList.add(homeIte5)
-        dataList.add(homeIte6)
-
     }
 
 
@@ -77,15 +53,17 @@ class HomeFragment : Fragment(){
         if (SharePrefUtils.getLoginType(requireContext()).equals(requireActivity().getString(R.string.user_type_reader))){
             fragmentHomeBinding!!.publish.visibility =View.GONE
         }
+        bookItemBeanDao = BookItemBeanDao()
+        bookBeanDao = BookBeanDao()
         fragmentHomeBinding!!.publish.setOnClickListener(){
             var intent = Intent(activity, PublishActivity::class.java)
             activity?.startActivity(intent)
         }
-
-
-
-        mRecyclerAdapter = context?.let { HomeItemAdapter(it,dataList) }
-        fragmentHomeBinding!!.recycler.setLayoutManager(GridLayoutManager(activity,4))
+        if (bookBeanDao!!.getContactAll2()!=null) {
+            dataList = bookBeanDao!!.getContactAll2() as MutableList<BookBean>;
+        }
+        mRecyclerAdapter = context?.let { BookListAdapter(it,dataList,) }
+        fragmentHomeBinding!!.recycler.setLayoutManager(LinearLayoutManager(activity))
         fragmentHomeBinding!!.recycler.setAdapter(mRecyclerAdapter)
 
 
@@ -101,14 +79,33 @@ class HomeFragment : Fragment(){
             override fun afterTextChanged(s: Editable?) {
                 // 在文本变化之后执行的操作
                 val newText = s.toString().trim()
-//                filterData(newText)
+                filterData(newText)
             }
         })
-        fragmentHomeBinding!!.kh.setOnClickListener(){
-
-        }
     }
 
+    private fun filterData(query: String) {
+        if (TextUtils.isEmpty(query)){
+            if (bookBeanDao!!.getContactAll2()!=null) {
+                dataList = bookBeanDao!!.getContactAll2() as MutableList<BookBean>;
+            }
+            mRecyclerAdapter!!.setData(dataList)
+            mRecyclerAdapter!!.notifyDataSetChanged()
+        }else {
+            val filteredData: MutableList<BookBean> = mutableListOf<BookBean>()
+            if (bookBeanDao!!.getContactAll2() != null) {
+                dataList = bookBeanDao!!.getContactAll2() as MutableList<BookBean>;
+            }
+            for (item in dataList) {
+                if (item.author!!.contains(query) || item.bookName!!.contains(query)) {
+                    filteredData.add(item)
+                }
+            }
+            dataList = filteredData
+            mRecyclerAdapter!!.setData(dataList)
+            mRecyclerAdapter!!.notifyDataSetChanged()
+        }
+    }
 
     fun splitTabLayout(tabLayout: TabLayout) {
         if (tabLayout.tabCount < 2) {
